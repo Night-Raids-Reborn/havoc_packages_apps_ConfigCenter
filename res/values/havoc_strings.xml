@@ -717,4 +717,8 @@
     <string name="background_process_killer_title">Kill background processes</string>
     <string name="background_process_killer_summary">Stop all non-essential background processes when the device is idle</string>
 
+    <!--  Application downgrade -->
+    <string name="app_downgrade_title">Allow application downgrade</string>
+    <string name="app_downgrade_summary">This allows you to downgrade applications. Note that this may lead to crashes and data corruption.</string>
+
 </resources>

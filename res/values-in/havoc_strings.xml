@@ -412,4 +412,7 @@
     <!-- Notification count -->
     <!-- Dashboard -->
     <!-- Pulse -->
+    <!--  Application downgrade -->
+    <string name="app_downgrade_title">Izinkan downgrade aplikasi</string>
+    <string name="app_downgrade_summary">Ini memungkinkan Anda untuk menurunkan versi aplikasi. Perhatikan bahwa ini dapat menyebabkan kerusakan dan kerusakan data.</string>
 </resources>
