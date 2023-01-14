@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.os.Handler;
+import java.net.InetAddress;
 
 import androidx.preference.Preference;
 
@@ -40,6 +42,10 @@ public class Misc extends SettingsPreferenceFragment implements
     private static final String GAMING_MODE_ENABLED = "gaming_mode_enabled";
 
     private SystemSettingMasterSwitchPreference mGamingMode;
+
+    private static final String PREF_ADBLOCK = "persist.aicp.hosts_block";
+
+    private Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +68,16 @@ public class Misc extends SettingsPreferenceFragment implements
             boolean value = (Boolean) newValue;
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.GAMING_MODE_ENABLED, value ? 1 : 0);
+            return true;
+        }  else if (PREF_ADBLOCK.equals(preference.getKey())) {
+            // Flush the java VM DNS cache to re-read the hosts file.
+            // Delay to ensure the value is persisted before we refresh
+            mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        InetAddress.clearDnsCache();
+                    }
+            }, 1000);
             return true;
         }
         return false;
